@@ -16,6 +16,6 @@ spec:
 
             backend:
               service:
-                name: my-service
+                name: myappsvc
                 port:
                   number: 80
