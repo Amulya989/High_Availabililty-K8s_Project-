@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mycm
+  name: configmap
   namespace: default
 data:
   DB_HOST: "mysqldb"
