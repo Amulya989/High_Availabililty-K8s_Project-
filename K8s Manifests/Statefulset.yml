@@ -23,7 +23,7 @@ spec:
             name: mysecret
         volumeMounts:
         - name: mydb-pvc
-          mountPath: /var/lib/mysql
+          mountPath: /usr/share/nginx
 
   volumeClaimTemplates:
   - metadata:
