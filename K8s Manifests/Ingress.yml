@@ -4,18 +4,15 @@ metadata:
   name: myingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-
 spec:
   ingressClassName: nginx
-
   rules:
-    - http:
-        paths:
-          - path: /
-            pathType: Prefix
-
-            backend:
-              service:
-                name: myappsvc
-                port:
-                  number: 80
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: myappsvc
+            port:
+              number: 80
