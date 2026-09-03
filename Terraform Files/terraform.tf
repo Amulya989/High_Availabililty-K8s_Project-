@@ -14,7 +14,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket       = "amu.01"
+    bucket       = "sush.01"
     key          = "k8s_project/terraform.tfstate"
     region       = "us-east-2"
     use_lockfile = true
