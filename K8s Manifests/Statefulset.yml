@@ -23,7 +23,7 @@ spec:
             name: mysecret
         volumeMounts:
         - name: mydb-pvc
-          mountPath: /amu/app/one
+          mountPath: /var/lib/mysql
 
   volumeClaimTemplates:
   - metadata:
