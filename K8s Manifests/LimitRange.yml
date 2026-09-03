@@ -10,5 +10,5 @@ spec:
       cpu: 1
       memory: '1Gi'
     defaultRequest:
-      cpu: 1
-      memory: '1Gi'
+      cpu: '500m'
+      memory: '500Mi'
