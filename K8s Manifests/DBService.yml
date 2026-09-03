@@ -1,0 +1,11 @@
+apiversion: v1
+kind: Service
+metadata:
+  name: mydbsvc
+spec:
+  clusterIP: None
+  selector:
+    app: db
+  ports:
+    - port: 80
+      targetPort: 3306

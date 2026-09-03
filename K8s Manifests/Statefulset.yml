@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mydb
+spec:
+  serviceName: mydbsvc
+  replicas: 2
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: cont2
+        image: amulya989/phpapp:dbimg
+        ports:
+        - containerPort: 3306
+        envFrom:
+        - secretRef:
+            name: mysecret
+        volumeMounts:
+        - name: mydb-pvc
+          mountPath: /var/lib/mysql
+
+  volumeClaimTemplates:
+  - metadata:
+      name: mydb-pvc
+    spec:
+      storageClassName: gp2
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 4Gi
+       

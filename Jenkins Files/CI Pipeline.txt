@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+    environment {
+        scannerHome = tool 'mysonar'
+    }
+    
+    stages {
+        stage ("cleanWS") {
+            steps {
+                cleanWs()
+            }
+        }
+        
+        stage ('code') {
+            steps {
+                git "https://github.com/Amulya989/Kubernetes_Project.git"
+            }
+        }
+        
+        stage ('CQA') {
+            steps {
+                 withSonarQubeEnv('mysonar') {
+                      sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=Project_Practise"
+                 }
+            }
+        }
+        
+        stage ('QualityGates') {
+            steps {
+                waitForQualityGate abortPipeline: true, credentialsId: 'Sonar'
+            }
+        }
+        
+        stage ('Image') {
+            steps {
+                sh "docker build -t amulya989/phpapp:appimg . "
+                sh "docker build -t amulya989/phpapp:dbimg database"
+            }
+        }
+        
+        stage ('Image Scan') {
+            steps {
+                sh "trivy image amulya989/phpapp:appimg"
+                sh "trivy image amulya989/phpapp:dbimg"
+            }
+        }
+        
+        stage ('Push Image') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker') {
+                      sh "docker push amulya989/phpapp:appimg"
+                      sh "docker push amulya989/phpapp:dbimg"
+                    }
+                }
+            }  
+        }
+    }
+}
