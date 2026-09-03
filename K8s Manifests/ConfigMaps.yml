@@ -4,5 +4,5 @@ metadata:
   name: mycm
   namespace: default
 data:
-  DB_HOST: mysqldb
+  DB_HOST: "mysqldb"
   DB_PORT: '3306'
