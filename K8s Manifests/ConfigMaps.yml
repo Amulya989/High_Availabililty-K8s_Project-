@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: configmap
+  name: bankconfig
   namespace: default
 data:
   DB_HOST: "mysqldb"
